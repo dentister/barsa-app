@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema 
+	xmlns:tns="http://localhost:8899/Barsa/TM" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://localhost:8899/Barsa/TM"
+	elementFormDefault="qualified">
+
+	<xsd:complexType name="TicketType">
+		<xsd:sequence>
+
+			<xsd:element name="id" maxOccurs="1" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="1"></xsd:minInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="title" maxOccurs="1" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"></xsd:minLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="description" maxOccurs="1"
+				minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"></xsd:minLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="assignee" type="tns:UserInfo"
+				maxOccurs="1" minOccurs="0">
+			</xsd:element>
+			<xsd:element name="author" type="tns:UserInfo" maxOccurs="1"
+				minOccurs="0">
+			</xsd:element>
+			<xsd:element name="typeId" maxOccurs="1" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="1"></xsd:minInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="statusId" maxOccurs="1" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="1"></xsd:minInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+
+
+
+			<xsd:element name="parentTicketId" maxOccurs="1"
+				minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="1"></xsd:minInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ProcessDataType">
+
+		<xsd:sequence>
+			<xsd:element name="item" type="tns:CudTicketOperationType"
+				maxOccurs="unbounded" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CudTicketOperationType">
+		<xsd:sequence>
+			<xsd:element name="operation" maxOccurs="1" minOccurs="1">
+
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="ADD"></xsd:enumeration>
+						<xsd:enumeration value="MOD"></xsd:enumeration>
+						<xsd:enumeration value="DEL"></xsd:enumeration>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ticket" type="tns:TicketType" maxOccurs="1" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="UserInfo">
+		<xsd:choice>
+			<xsd:element name="id">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:long">
+
+						<xsd:minInclusive value="1"></xsd:minInclusive>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="login">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:minLength value="1"></xsd:minLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="LifeTicketOperationType">
+    	<xsd:sequence>
+    		<xsd:element name="operation" maxOccurs="1" minOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:enumeration value="START"></xsd:enumeration>
+    					<xsd:enumeration value="HOLD"></xsd:enumeration>
+    					<xsd:enumeration value="RESOLVE"></xsd:enumeration>
+    					<xsd:enumeration value="CLOSE"></xsd:enumeration>
+    					<xsd:enumeration value="START_QA"></xsd:enumeration>
+    					<xsd:enumeration value="START_DEV"></xsd:enumeration>
+    					<xsd:enumeration value="FINISH_QA"></xsd:enumeration>
+    					<xsd:enumeration value="FINISH_DEV"></xsd:enumeration>
+    					<xsd:enumeration value="START_ANALYSIS"></xsd:enumeration>
+    					<xsd:enumeration value="FINISH_ANALYSIS"></xsd:enumeration>
+    					<xsd:enumeration value="GO_STATUS"></xsd:enumeration>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="ticketId" maxOccurs="1" minOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:long">
+    					<xsd:minInclusive value="1"></xsd:minInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="statusId" maxOccurs="1" minOccurs="0">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:long">
+
+    					<xsd:minInclusive value="1"></xsd:minInclusive>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:element name="doTicketOperation">
+    	<xsd:complexType>
+    		<xsd:sequence>
+    			<xsd:element name="serviceInfo" type="tns:ServiceInfoType" maxOccurs="1" minOccurs="1"></xsd:element>
+    			<xsd:element name="record"
+    				type="tns:DoTicketOperationType" maxOccurs="unbounded"
+    				minOccurs="1">
+    			</xsd:element>
+    		</xsd:sequence>
+    	</xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="DoTicketOperationType">
+    	<xsd:choice>
+    		<xsd:element name="cudTicketOperation" type="tns:CudTicketOperationType"></xsd:element>
+    		<xsd:element name="lifeTicketOperation" type="tns:LifeTicketOperationType"></xsd:element>
+    	</xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="ServiceInfoType">
+		<xsd:sequence>
+			<xsd:element name="transactionId" type="xsd:string"
+				maxOccurs="1" minOccurs="0"></xsd:element>
+			<xsd:element name="operationId" type="xsd:string"
+				maxOccurs="1" minOccurs="0"></xsd:element>
+			<xsd:element name="sourceSystem" type="xsd:string"
+				maxOccurs="1" minOccurs="0"></xsd:element>
+			<xsd:element name="targetSystem" type="xsd:string"
+				maxOccurs="1" minOccurs="0"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

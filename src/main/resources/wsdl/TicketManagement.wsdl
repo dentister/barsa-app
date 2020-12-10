@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:tns="http://localhost:8899/Barsa/TM/wsdl" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:ticket="http://localhost:8899/Barsa/TM"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	name="TicketManagement" 
+	targetNamespace="http://localhost:8899/Barsa/TM/wsdl">
+	
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema">
+    	<xsd:import namespace="http://localhost:8899/Barsa/TM" schemaLocation="TicketManagement.xsd" />             
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="doTicketOperationRequest">
+    <wsdl:part element="ticket:doTicketOperation" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="TicketManagement">
+    <wsdl:operation name="doTicketOperation">
+      <wsdl:input message="tns:doTicketOperationRequest"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TicketManagementSOAP" type="tns:TicketManagement">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="doTicketOperation">
+<!--       <soap:operation soapAction="http://localhost:8899/Barsa/TM/doTicketOperation"/> -->
+      <soap:operation soapAction=""/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TicketManagement">
+    <wsdl:port binding="tns:TicketManagementSOAP" name="TicketManagementSOAP">
+      <soap:address location="http://localhost:8899/Barsa/TM"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:tns="http://localhost:8899/Barsa/notifyUM/wsdl" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:user="http://localhost:8899/Barsa/notifyUM"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	name="UserManagementNotification" 
+	targetNamespace="http://localhost:8899/Barsa/notifyUM/wsdl">
+	
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema">
+    	<xsd:import namespace="http://localhost:8899/Barsa/notifyUM" schemaLocation="UserManagementNotification.xsd" />             
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="notifyUserOperationRequest">
+    <wsdl:part element="user:notification" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="UserManagementNotification">
+    <wsdl:operation name="notifyUserOperation">
+      <wsdl:input message="tns:notifyUserOperationRequest"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserManagementNotificationSOAP" type="tns:UserManagementNotification">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="notifyUserOperation">
+      <soap:operation soapAction=""/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserManagementNotification">
+    <wsdl:port binding="tns:UserManagementNotificationSOAP" name="UserManagementNotificationSOAP">
+      <soap:address location="http://localhost:8899/Barsa/notifyUM"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
